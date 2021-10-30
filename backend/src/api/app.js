@@ -5,7 +5,6 @@ const { error } = require('../middlewares');
 const { listRouter, userRouter } = require('./routes');
 
 const app = express();
-
 app.use(bodyParser.json());
 // Não usado urlencoded , pois não há alteração na url.
 // app.use(bodyParser.urlencoded({ extended: true }));

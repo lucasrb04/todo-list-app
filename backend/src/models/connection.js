@@ -7,8 +7,6 @@ const OPTIONS = {
 };
 
 const { MONGO_DB_URL } = process.env;
-// 'mongodb://localhost:27017/CheckList'; // for local
-// const MONGO_DB_URL = 'mongodb://mongodb:27017/CheckList'; // for github 
 
 const DB_NAME = 'CheckList';
 

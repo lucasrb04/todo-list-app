@@ -8,22 +8,21 @@ const createUser = rescue(async (req, res, next) => {
   const { user, password } = req.body;
 
   const newUser = await userService.createUser(user, password);
-
   if (newUser.error) return next(newUser);
 
   return res.status(httpStatus.CREATED).json(newUser);
 });
 
 const login = rescue(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { user, password } = req.body;
   
   const secret = process.env.JWT_SECRET;
   const jwtConfig = {
-    expiresIn: '7d',
+    expiresIn: '1d',
     algorithm: 'HS256',
   };
 
-  const loggedUser = await userService.login(email, password);
+  const loggedUser = await userService.login(user, password);
 
   if (loggedUser.error) return next(loggedUser);
 

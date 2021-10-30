@@ -1,9 +1,11 @@
+const httpStatus = require('http-status');
+
 const userExists = (existingUser) => {
   if (existingUser) {
     return {
-      number: 409,
+      number: httpStatus.CONFLICT,
       error: {
-        message: 'Email already registered',
+        message: 'Usuário já está registrado.',
       },
     };
   }
@@ -12,9 +14,20 @@ const userExists = (existingUser) => {
 const authenticatedLogin = (existingUser, password) => {
   if (!existingUser || existingUser.password !== password) {
     return {
-      number: 401,
+      number: httpStatus.UNAUTHORIZED,
       error: {
-        message: 'Incorrect username or password',
+        message: 'Usuário ou senha incorreta.',
+      },
+    };
+  }
+};
+
+const listExists = (list) => {
+  if (!list) {
+    return {
+      number: 404,
+      error: {
+        message: 'Lista não encontrada.',
       },
     };
   }
@@ -23,4 +36,5 @@ const authenticatedLogin = (existingUser, password) => {
 module.exports = {
   userExists,
   authenticatedLogin,
+  listExists,
 };

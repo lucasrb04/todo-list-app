@@ -1,14 +1,13 @@
 const { Router } = require('express');
 
-const { validate, authJWT } = require('../../middlewares');
+const { validation, authJWT } = require('../../middlewares');
 const { listController } = require('../../controllers');
 
-const listRouter = Router();
+const router = Router();
+router.get('/', authJWT, listController.getAllLists);
+router.post('/', authJWT, validation.validateList, listController.createList);
+router.get('/:listId', authJWT, listController.getListById);
+router.put('/:listId', authJWT, validation.validateList, listController.updateList);
+router.delete('/:listId', authJWT, listController.deleteList);
 
-listRouter.get('/', authJWT, listController.getAllLists);
-listRouter.post('/', authJWT, validate.createRecipe, listController.createList);
-listRouter.get('/:id', authJWT, listController.getListById);
-listRouter.put('/:id', authJWT, listController.updateList);
-listRouter.delete('/:id', authJWT, listController.deleteList);
-
-module.exports = { listRouter };
+module.exports = router;

@@ -18,8 +18,8 @@ const validateUser = (req, res, next) => {
 };
 
 const validateList = (req, res, next) => {
-  const { name, list } = req.body;
-  const listInfo = [name, list];
+  const { name, tasks } = req.body;
+  const listInfo = [name, tasks];
   existingFields(listInfo, res);
 
   next();

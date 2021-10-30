@@ -14,8 +14,8 @@ const createList = rescue(async (req, res, next) => {
 });
 
 const getAllLists = rescue(async (req, res, _next) => {
-  const { userId } = req.body;
-  const lists = await listService.getAllLists(userId);
+  const { userInfo } = req.body;
+  const lists = await listService.getAllLists(userInfo);
 
   return res.status(httpStatus.OK).json(lists);
 });
@@ -32,23 +32,28 @@ const getListById = rescue(async (req, res, next) => {
 });
 
 const updateList = rescue(async (req, res, next) => {
-  const { id } = req.params;
-  const list = req.body;
-  
-  const updatedList = await listService.updateList(list, id);
-  
+  // Pegando id da url da requisição
+  const { listId } = req.params;
+  //  Criando objeto com id da lista e as informações do usuário vinda da autenticaçãoJWT 
+  const listInfo = { ...req.body, listId };
+  // Atualizando lista
+  const updatedList = await listService.updateList(listInfo);
+  // Verificando se houve erro
   if (updatedList.error) return next(updatedList);
-
+  // Retornando status de sucesso e a lista atualizada 
   return res.status(httpStatus.OK).json(updatedList);
 });
 
 const deleteList = rescue(async (req, res, next) => {
-  const { id } = req.params;
-  
-  const deletedList = await listService.deleteList(id);
-
+  // Pegando id da url da requisição
+  const { listId } = req.params;
+  //  Criando objeto com id da lista e as informações do usuário vinda da autenticaçãoJWT 
+  const listInfo = { ...req.body, listId };
+  // Deletando lista
+  const deletedList = await listService.deleteList(listInfo);
+  // Verificando se a lista foi deletada
   if (deletedList.error) return next(deletedList);
-
+  // Retornando status de sucesso
   return res.status((httpStatus.OK)).send({ message: 'Lista deletada com sucesso' });
 });
 
