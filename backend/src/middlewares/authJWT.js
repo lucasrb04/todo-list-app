@@ -34,11 +34,11 @@ module.exports = async (req, res, next) => {
     /* O usuário existe! Colocamos ele em um campo no objeto req.
        Dessa forma, o usuário estará disponível para outros middlewares que
        executem em sequência */
-    req.userId = decoded.userId;
+    req.body.userId = decoded.userId;
     /* Por fim, chamamos o próximo middleware que, no nosso caso,
        é a própria callback da rota. */
     next();
   } catch (err) {
-    return res.status(httpStatus.UNAUTHORIZED).json({ message: 'O token não é obrigatório.' });
+    return res.status(httpStatus.UNAUTHORIZED).json({ message: 'O token não é válido.' });
   }
 };

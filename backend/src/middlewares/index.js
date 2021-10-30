@@ -1,5 +1,5 @@
 const error = require('./error');
-const validate = require('./validationMidd');
-const authJWT = require('./validateJWT');
+const validation = require('./validation');
+const authJWT = require('./authJWT');
 
-module.exports = { error, validate, authJWT };
+module.exports = { error, validation, authJWT };

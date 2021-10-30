@@ -1,50 +1,46 @@
-const { recipeModel } = require('../models');
+const { listModel } = require('../models');
 
-const createRecipe = async (recipeInfo, userId) => (recipeModel.create(recipeInfo, userId));
+const createList = async (listInfo) => (listModel.create(listInfo));
 
-const getAllRecipes = async () => recipeModel.getAllRecipes();
+const getAllLists = async (userId) => listModel.getAllLists(userId);
 
-const getRecipeById = async (id) => {
-  // Solicitamos que o model realize a busca no banco
-  const recipe = await recipeModel.getRecipeById(id);
+const getListById = async (listInfo) => {
+  const list = await listModel.getListById(listInfo);
 
-  // Caso nenhum autor seja encontrado, retornamos um objeto de erro.
-  if (!recipe) {
+  if (!list) {
     return {
       number: 404,
       error: {
-        message: 'recipe not found',
+        message: 'list not found',
       },
     };
   }
 
-  // Caso haja um autor com o ID informado, retornamos esse autor
-  return recipe;
+  return list;
 };
 
-const updateRecipe = async (recipeInfo, id) => {
-  // Buscamos um produto com o mesmo nome que desejamos criar
-  const getRecipe = await getRecipeById(id);
+const updateList = async (listInfo, id) => {
+  const getList = await getListById(id);
 
-  if (getRecipe.error) return getRecipe;
+  if (getList.error) return getList;
   
-  return recipeModel.updateRecipe(recipeInfo, id);
+  return listModel.updateList(listInfo, id);
 };
 
-const deleteRecipe = async (id) => {
-  const deletedRecipe = await getRecipeById(id);
+const deleteList = async (id) => {
+  const deletedList = await getListById(id);
 
-  if (deletedRecipe.error) return deletedRecipe;
+  if (deletedList.error) return deletedList;
 
-  recipeModel.deleteRecipe(id);
+  listModel.deleteList(id);
 
-  return deletedRecipe;
+  return deletedList;
 };
 
 module.exports = {
-  createRecipe,
-  getAllRecipes,
-  getRecipeById,
-  updateRecipe,
-  deleteRecipe,
+  createList,
+  getAllLists,
+  getListById,
+  updateList,
+  deleteList,
 };

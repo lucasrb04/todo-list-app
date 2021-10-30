@@ -5,24 +5,26 @@ const { listService } = require('../services');
 
 const createList = rescue(async (req, res, next) => {
   const listInfo = req.body;
-  const { userId } = req;
 
-  const newList = await listService.createList(listInfo, userId);
+  const newList = await listService.createList(listInfo);
 
   if (newList.error) return next(newList);
 
   return res.status(httpStatus.CREATED).json(newList);
 });
 
-const getAllLists = rescue(async (_req, res, _next) => {
-  const lists = await listService.getAllLists();
+const getAllLists = rescue(async (req, res, _next) => {
+  const { userId } = req.body;
+  const lists = await listService.getAllLists(userId);
 
   return res.status(httpStatus.OK).json(lists);
 });
 
 const getListById = rescue(async (req, res, next) => {
-  const { id } = req.params;
-  const list = await listService.getListById(id);
+  const { listId } = req.params;
+  const listInfo = { ...req.body, listId };
+  
+  const list = await listService.getListById(listInfo);
 
   if (list.error) return next(list);
 
@@ -47,7 +49,7 @@ const deleteList = rescue(async (req, res, next) => {
 
   if (deletedList.error) return next(deletedList);
 
-  return res.status((httpStatus.OK)).send({ message: 'List deleted' });
+  return res.status((httpStatus.OK)).send({ message: 'Lista deletada com sucesso' });
 });
 
 module.exports = {
