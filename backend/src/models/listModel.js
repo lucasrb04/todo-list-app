@@ -4,17 +4,17 @@ const connection = require('./connection');
 
 const createList = async (listInfo) => {
   const { name, tasks, userInfo } = listInfo;
-  const { user } = userInfo;
   const newList = await connection()
   .then((db) => db.collection('lists')
   .insertOne({ name, tasks, userInfo }));
-  
-  return { _id: newList.insertedId, name, tasks, user };
+  delete userInfo.userId;
+  return { _id: newList.insertedId, name, tasks };
 };
 
 const getAllLists = async (userInfo) => {
   const lists = await connection()
-    .then((db) => db.collection('lists').find({ userInfo }, { _id: 0, userInfo: 0 }).toArray());
+    .then((db) => db.collection('lists')
+    .find({ userInfo }, { projection: { userInfo: 0 } }).toArray());
   return lists;
 };
 
@@ -26,18 +26,23 @@ const getListById = async (listInfo) => {
   // Busca o listId no banco de dados, considerando se o usuário é o dono do listId.
   const listData = await connection()
     .then((db) => db.collection('lists')
-    .findOne({ _id: ObjectId(listInfo.listId), userInfo: listInfo.userInfo }));
+    .findOne({ _id: ObjectId(listInfo.listId), userInfo: listInfo.userInfo },
+             { projection: { userInfo: 0 } }));
+             
   if (!listData) return null;
 
   return listData;
 };
 
-const updateList = async (listInfo, _id) => {
-    await connection()
-    .then((db) => db.collection('lists')
-    .updateOne({ _id: ObjectId(_id) }, { $set: { ...listInfo } }));
+const updateList = async (listInfo) => {
+  const { name, tasks } = listInfo;
 
-  const editedList = await getListById(_id);
+  await connection()
+    .then((db) => db.collection('lists')
+    .updateOne({ _id: ObjectId(listInfo.listId), userInfo: listInfo.userInfo },
+               { $set: { name, tasks } }));
+
+  const editedList = await getListById(listInfo);
 
   return editedList;
 };
