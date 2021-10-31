@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-const Form = ({ todos, setTodos }) => {
+const Form = ({ todos, setTodos, setStatus }) => {
   const [inputText, setInputText] = useState('');
 
   const handleChange = (e) => {
     setInputText(e.target.value);
   };
+
   const submitTodo = (e) => {
     e.preventDefault();
     if(e.target.value !== '') {
@@ -14,6 +15,11 @@ const Form = ({ todos, setTodos }) => {
       setInputText("");
     };
   };
+
+  const statusHlandler = (e) => {
+    setStatus(e.target.value);
+  };
+
   return (
     <form>
       <input 
@@ -26,10 +32,10 @@ const Form = ({ todos, setTodos }) => {
         <i className="fas fa-plus-square"></i>
       </button>
       <div className="select">
-        <select name="todos" className="filter-todo">
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
+        <select onChange={statusHlandler} name="todos" className="filter-todo">
+          <option value="byTime">Mais recente</option>
+          <option value="byName">Ordem alfabética</option>
+          <option value="byStatus">Completos</option>
         </select>
       </div>
     </form> 
