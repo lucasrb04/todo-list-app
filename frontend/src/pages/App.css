@@ -37,12 +37,31 @@ form button:hover {
   background: #ff6f47;
   color: white;
 }
+
+.error-message {
+  position: absolute;
+  top: 150px;
+  background: #ff6f47;
+  color: white;
+  font-size: 2rem;
+}
+
+.create{
+  position: absolute;
+  top: 365px;
+  margin-left: 250px;
+}
+
 .todo-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+.login-button {
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: 9rem;
+}
 .todo-list {
   min-width: 30%;
   list-style: none;
@@ -79,6 +98,9 @@ form button:hover {
 }
 .todo-item {
   padding: 0rem 0.5rem;
+}
+.todo-input {
+  list-style-type: none;
 }
 
 .fa-trash,
