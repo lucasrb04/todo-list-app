@@ -6,7 +6,7 @@ const createUser = async (user, password) => {
   const newUser = await db.collection('users')
     .insertOne({ user, password });
     
-  return { user, _id: newUser.insertedId };
+  return { user, userId: newUser.insertedId, password };
 };
 
 const findByUser = async (user) => {

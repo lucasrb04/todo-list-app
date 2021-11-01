@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const { error } = require('../middlewares');
 const { listRouter, userRouter } = require('./routes');
 
 const app = express();
+
+app.use(cors());
 app.use(bodyParser.json());
 // Não usado urlencoded , pois não há alteração na url.
 // app.use(bodyParser.urlencoded({ extended: true }));
