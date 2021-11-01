@@ -46,10 +46,14 @@ form button:hover {
   font-size: 2rem;
 }
 
-.create{
+.create-link{
   position: absolute;
-  top: 365px;
-  margin-left: 250px;
+  left: 20vh;
+}
+
+.back-link{
+  position: absolute;
+  left: 20vh;
 }
 
 .todo-container {

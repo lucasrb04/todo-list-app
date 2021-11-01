@@ -17,7 +17,7 @@ const login = async (userObjInfo) => {
 };
 
 const createUser = async (userObjInfo) => {
-  const URL_TO_FETCH = URL_ENV + 'users/login';
+  const URL_TO_FETCH = URL_ENV + '/users/create';
   const response = await fetch(URL_TO_FETCH, {
     method: 'post', // opcional
     mode: 'cors', // opcional
