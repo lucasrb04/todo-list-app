@@ -3,12 +3,31 @@ import './App.css';
 
 import Form from '../components/Form';
 import TodoList from '../components/TodoList';
+import { getData, storeData } from '../helpers/localStorage';
+import { getAllLists, createUser } from '../service/api';
+
+
+const jwt = require('jsonwebtoken');
+
 
 function List() {
   // State
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState('byTime');
   const [filteredTodos, setFilteredTodos] = useState([]);
+
+
+  const fetchData = async() => {
+    const token = getData('token');
+    const response = await getAllLists({ token });
+    console.log(response);
+    
+  }
+  // Para verificar se o usuário já se logou e o token está armanzenado no localStorage
+  useEffect(() => {
+    fetchData()
+      .then(response => { console.log(response) })
+  }, []);
 
   // Effect  
   useEffect(() => {
@@ -48,16 +67,17 @@ function List() {
   }
   
   return (
-    <div className="App">
-    <header>
-      <h3>Todo List</h3>
-    </header>
+    <div className="todo-list-container">
     <Form 
       setTodos={setTodos} 
       todos={todos}
       setStatus={setStatus}
     />
-    <TodoList setTodos={setTodos} todos={todos} filteredTodos={ filteredTodos }/>
+    <TodoList 
+      setTodos={setTodos} 
+      todos={todos} 
+      filteredTodos={ filteredTodos }
+    />
     </div>
   );
 }

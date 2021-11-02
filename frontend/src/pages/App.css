@@ -48,12 +48,14 @@ form button:hover {
 
 .create-link{
   position: absolute;
-  left: 20vh;
+  margin-top: 1rem;
+  margin-left: 28rem;
 }
 
-.back-link{
+.login-button {
   position: absolute;
-  left: 20vh;
+  margin-top: 1rem;
+  margin-left: 9.5rem;
 }
 
 .todo-container {
@@ -61,11 +63,13 @@ form button:hover {
   justify-content: center;
   align-items: center;
 }
-.login-button {
-  position: absolute;
-  margin-top: 1rem;
-  margin-left: 9rem;
+
+.todo-list-container {
+  margin-top: -15rem;
+  /* position: absolute; */
+  
 }
+
 .todo-list {
   min-width: 30%;
   list-style: none;
@@ -89,7 +93,8 @@ form button:hover {
 }
 
 .trash-btn,
-.complete-btn {
+.complete-btn,
+.edit-btn {
   background: #ff6f47;
   color: white;
   border: none;
@@ -100,10 +105,22 @@ form button:hover {
 .complete-btn {
   background: rgb(11, 212, 162);
 }
+
+.edit-btn {
+  background: rgb(179, 189, 186);
+}
+.add-btn {
+  top: 0;
+  position: absolute;
+  margin-top: 300px;
+  /* margin-left: rem; */
+}
+
 .todo-item {
   padding: 0rem 0.5rem;
 }
 .todo-input {
+  border: 1px solid #b8aaa6;
   list-style-type: none;
 }
 

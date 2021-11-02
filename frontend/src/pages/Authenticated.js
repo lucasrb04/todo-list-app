@@ -2,18 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import './App.css';
 import { login, createUser } from '../service/api';
-
-
-
 import { getData, storeData } from '../helpers/localStorage';
 
 const jwt = require('jsonwebtoken');
 
+
 const Authenticated = ({todos, setTodos, filteredTodos}) => {
   const { pathname } = useLocation();
+
   const [token, setToken] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [userInfo, setUserInfo] = useState({ user: '', password: '' });
+
+  const errorMessage = (response) => {
+    if (response.message) {
+      const TIME_ERR = 5000;
+      setErrorMsg(response.message);
+      setTimeout(() => { setErrorMsg(''); }, TIME_ERR);
+    } else {
+      setToken(response.token);
+      storeData('token', response.token);
+    }
+  };
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -23,24 +33,28 @@ const Authenticated = ({todos, setTodos, filteredTodos}) => {
     });
   };
 
-  const fetchData = async(token) => {
+  const fetchData = async() => {
+    // Procura se existe um token no localStorage
+    const getToken = getData('token');
+    // Pega o segredo no .env
     const secret = process.env.REACT_APP_JWT_SECRET;
-    if (token) {
-      const decoded = jwt.verify(token, secret);
+    // Verifica se o token existe
+    if (getToken) {
+      // Se existir, verifica se o token é válido
+      const decoded = jwt.verify(getToken, secret);
       const { user, password } = decoded;
+      // Se o token for válido, é feito o login
       const response = await login({ user, password });
-      
-      console.log(response);
-      // const responseJson = await response.json();
-      // return responseJson;
+      // se o token for inválido, é lançado um erro,
+      // se for válido, o token é validado novamente 
+      // e o usuário é redirecionado para a página inicial
+      errorMessage(response);
     }
   }
   // Para verificar se o usuário já se logou e o token está armanzenado no localStorage
   useEffect(() => {
-    const getToken = getData('token');
-    fetchData(getToken)
+    fetchData()
       .then(response => { console.log(response) })
-    // setToken(getToken);
   }, []);
 
   const submitLogin = async(e) => {
@@ -51,14 +65,7 @@ const Authenticated = ({todos, setTodos, filteredTodos}) => {
     } else {
       response = await createUser(userInfo);
     }
-    if (response.message) {
-      const TIME_ERR = 5000;
-      setErrorMsg(response.message);
-      setTimeout(() => { setErrorMsg(''); }, TIME_ERR);
-    } else {
-      setToken(response.token);
-      storeData('token', response.token);
-    }
+    errorMessage(response);
   };
   return (
     <div className="todo-container">
@@ -88,17 +95,17 @@ const Authenticated = ({todos, setTodos, filteredTodos}) => {
           </li>
           <button 
             onClick={submitLogin}
-            className="todo-button login-button" 
+            className="login-button" 
             type="submit">
               {pathname === '/cadastrar' ? 'Cadastrar' : 'Login'}
           </button>
           {pathname === '/cadastrar' 
-            ? <Link className='back-link login-button' to="/">
+            ? <Link className='create-link' to="/">
                 <button>
                   <i className="fas fa-undo-alt"></i>
                 </button>
               </Link> 
-            : <Link className='create-link login-button' to="/cadastrar">
+            : <Link className='create-link' to="/cadastrar">
                 <button>
                   <i className="fas fa-user-plus"></i>
                 </button>
