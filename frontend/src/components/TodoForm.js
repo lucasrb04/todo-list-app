@@ -9,7 +9,7 @@ const TodoForm = ({ todos, setTodos, setStatus }) => {
 
   const submitTodo = (e) => {
     e.preventDefault();
-    if(e.target.value !== '') {
+    if(inputText) {
       const now = new Date();
       setTodos([...todos, { text: inputText, completed: false, createdAt: now.getTime() }]);
       setInputText("");

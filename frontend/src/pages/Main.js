@@ -61,7 +61,7 @@ function Main() {
     </header>
     {pathname === '/list' 
             ? <AllLists lists={lists} setLists={setLists} token={getToken} authenticateNFetch={authenticateNFetch} />
-            : <ListItem />}
+            : <ListItem setRedirect={setRedirect}/>}
     </div>
   );
 }

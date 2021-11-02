@@ -119,7 +119,7 @@ form button:hover {
 .save-btn {
   top: 0;
   position: absolute;
-  margin-top: 40vh;
+  margin-top: 22vh;
   margin-left: 45%;
 }
 
@@ -142,7 +142,6 @@ form button:hover {
 .todo-input {
   border: 1px solid #b8aaa6;
   list-style-type: none;
-  /* margin-left: 10px; */
 }
 
 .fa-trash,

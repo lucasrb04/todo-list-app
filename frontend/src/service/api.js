@@ -86,4 +86,19 @@ const getListById = async ({token, id}) => {
   return data;
 };
 
-export { login, createUser, getAllLists, deleteList, createList, getListById };
+const editList = async ({token, id, listInfo}) => {
+  const URL_TO_FETCH = URL_ENV + `/list/${id}`;
+  const response = await fetch(URL_TO_FETCH, {
+    method: 'put', // opcional
+    mode: 'cors', // opcional
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8', // The type of data you're sending
+      'authorization': token,
+    },
+    body: JSON.stringify(listInfo), // The data you're sending
+  });
+  const data = await response.json();
+  return data;
+};
+
+export { login, createUser, getAllLists, deleteList, createList, getListById, editList };

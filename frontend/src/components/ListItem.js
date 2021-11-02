@@ -6,13 +6,13 @@ import { Redirect, useLocation } from 'react-router-dom';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import { getData, storeData } from '../helpers/localStorage';
-import { getAllLists, getListById } from '../service/api';
+import { editList, getListById } from '../service/api';
 
 
 const jwt = require('jsonwebtoken');
 
 
-function ListItem() {
+function ListItem({ setRedirect }) {
   const { pathname } = useLocation();
   // State
   const [todos, setTodos] = useState([]);
@@ -22,27 +22,31 @@ function ListItem() {
 
 
   const fetchData = async() => {
+    // Retira o id a partir da url
     const id = pathname.split('/')[2];
-    console.log(id);
+    // Busca o token do localStorage
     const token = getData('token');
+    // Busca a lista pelo id
     const response = await getListById({ token, id });
-    console.log(response);
+    // Atualiza o nome da lista e as tarefas
     setName(response.name);
     setTodos(response.tasks);
   }
   // Para verificar se o usuário já se logou e o token está armanzenado no localStorage
   useEffect(() => {
+    // Ao começar a renderização, chama a função para aquição da lista
     fetchData()
   }, []);
 
   // Effect  
   useEffect(() => {
+    // Chama a função de filtrar as tarefas toda vez que as listas ou o status forem alteradas
     filterHlander();
   }, [todos, status]);
 
   // Function 
 
-  const sortMap = (field) => {
+  const sortText = (field) => {
     // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
     const mappedByName = todos.map(function(el, i) {
       return { index: i, value: el[field].toString().toLowerCase() };
@@ -59,11 +63,11 @@ function ListItem() {
   const filterHlander = () => {
     switch (status) {
       case 'byName':
-        const sortedByName = sortMap('text');
+        const sortedByName = sortText('text');
         setFilteredTodos(sortedByName)
         break;
       case 'byStatus':
-        const sortedByStatus = sortMap('completed');
+        const sortedByStatus = sortText('completed');
         setFilteredTodos(sortedByStatus)
         break;
       default:
@@ -78,7 +82,17 @@ function ListItem() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("salvar");
+    // Retira o id a partir da url
+    const id = pathname.split('/')[2];
+    // Busca o token do localStorage
+    const token = getData('token');
+    // Busca a lista pelo id
+    const response = await editList({ token, id, listInfo: { name, tasks: todos } });
+    // Atualiza o nome da lista e as tarefas
+    console.log(response);
+    if (!response.message) {
+      setRedirect(true);
+    }
   }
   return (
     <div className="todo-list-container">
@@ -89,8 +103,6 @@ function ListItem() {
       >
       Salvar Lista
       </button>
-      <header >
-        <h2>Nome da Lista:</h2>
         <form>
           <input 
             value={name} 
@@ -99,7 +111,6 @@ function ListItem() {
             className="todo-input" 
           />
         </form>
-      </header>
       <TodoForm 
         setTodos={setTodos} 
         todos={todos}
