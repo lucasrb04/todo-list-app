@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, Redirect, useLocation } from 'react-router-dom';
+
 import './App.css';
+
 import { login, createUser } from '../service/api';
 import { getData, storeData } from '../helpers/localStorage';
+import Consumer from '../helpers/context/Consumer';
 
 const jwt = require('jsonwebtoken');
 
@@ -10,9 +13,10 @@ const jwt = require('jsonwebtoken');
 const Login = ({todos, setTodos, filteredTodos}) => {
   const { pathname } = useLocation();
 
+  const { userInfo, setUserInfo } = useContext(Consumer);
+
   const [token, setToken] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [userInfo, setUserInfo] = useState({ user: '', password: '' });
 
   const errorMessage = (response) => {
     if (response.message) {

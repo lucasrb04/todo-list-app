@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Consumer from './Consumer';
 
 function Provider({ children }) {
-  const [stateA, setStateA] = useState('initialStateA');
+  const [userInfo, setUserInfo] = useState({ user: '', password: '' });
   const [stateB, setStateB] = useState('initialStateB');
+  
   const contextValue = {
-    stateA,
-    setStateA,
+    userInfo,
+    setUserInfo,
     stateB,
     setStateB,
   };

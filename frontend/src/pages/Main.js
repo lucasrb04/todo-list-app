@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Redirect, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Redirect, useLocation } from 'react-router-dom';
 
 import './App.css';
 
-import Form from '../components/Form';
-import TodoList from '../components/TodoList';
 import { getData, storeData } from '../helpers/localStorage';
-import { getAllLists, createUser } from '../service/api';
+import { getAllLists } from '../service/api';
 import TodoLists from '../components/TodoLists';
 import List from './List';
+import Consumer from '../helpers/context/Consumer';
 
 
 
 
 function Main() {
   const { pathname } = useLocation();
+
+  const { userInfo } = useContext(Consumer);
 
   const [lists, setLists] = useState([]);
   const [redirect, setRedirect] = useState(false);
@@ -47,6 +48,7 @@ function Main() {
     <div className="App">
       {redirect && <Redirect to='/' />}
     <header>
+      <h3 className="header-name">{userInfo.user}</h3>
       <button onClick={handleLogout} className="trash-btn logout-btn">
         <i className="fas fa-sign-out-alt"></i>
       </button>

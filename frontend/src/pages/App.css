@@ -116,6 +116,12 @@ form button:hover {
   /* margin-left: rem; */
 }
 
+.header-name {
+  top: 0;
+  position: absolute;
+  margin-top: 15vh;
+}
+
 .logout-btn {
   top: 0;
   position: absolute;
