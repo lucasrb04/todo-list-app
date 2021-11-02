@@ -1,6 +1,0 @@
-Feature – Quando é desenvolvimento de uma nova funcionalidade.
-Fix – Quando se trata de uma correção de bug.
-Docs – Quando se trata somente de uma alteração na documentação, como uma atualização no README.
-Style – Quando mudo somente folhas de estilo.
-Refactor – Quando refatoro completamente um trecho de código.
-Test – Quando o foram escritos ou corrigidos somente testes.
