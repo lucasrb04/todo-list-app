@@ -7,7 +7,7 @@ import { getData, storeData } from '../helpers/localStorage';
 const jwt = require('jsonwebtoken');
 
 
-const Authenticated = ({todos, setTodos, filteredTodos}) => {
+const Login = ({todos, setTodos, filteredTodos}) => {
   const { pathname } = useLocation();
 
   const [token, setToken] = useState('');
@@ -116,4 +116,4 @@ const Authenticated = ({todos, setTodos, filteredTodos}) => {
   );
 };
 
-export default Authenticated;
+export default Login;
