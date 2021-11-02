@@ -1,5 +1,5 @@
 import React from 'react';
-import Todo from './Todo';
+import TodoItem from './TodoItem';
 
 const TodoList = ({todos, setTodos, filteredTodos}) => {
 
@@ -7,7 +7,7 @@ const TodoList = ({todos, setTodos, filteredTodos}) => {
     <div className="todo-container">
       <ul className="todo-list">
         {filteredTodos.map((todo) => (
-          <Todo 
+          <TodoItem 
             key={todo.createdAt} 
             todos={todos}
             setTodos={setTodos}

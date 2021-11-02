@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form = ({ todos, setTodos, setStatus }) => {
+const TodoForm = ({ todos, setTodos, setStatus }) => {
   const [inputText, setInputText] = useState('');
 
   const handleChange = (e) => {
@@ -42,4 +42,4 @@ const Form = ({ todos, setTodos, setStatus }) => {
   );
 }
 
-export default Form;
+export default TodoForm;

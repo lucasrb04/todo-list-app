@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-import Form from '../components/Form';
-import TodoList from '../components/TodoList';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
 import { getData, storeData } from '../helpers/localStorage';
 import { getAllLists, createUser } from '../service/api';
 
@@ -10,7 +10,7 @@ import { getAllLists, createUser } from '../service/api';
 const jwt = require('jsonwebtoken');
 
 
-function List() {
+function ListItem() {
   // State
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState('byTime');
@@ -68,7 +68,7 @@ function List() {
   
   return (
     <div className="todo-list-container">
-    <Form 
+    <TodoForm 
       setTodos={setTodos} 
       todos={todos}
       setStatus={setStatus}
@@ -82,4 +82,4 @@ function List() {
   );
 }
 
-export default List;
+export default ListItem;

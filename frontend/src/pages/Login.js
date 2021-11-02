@@ -58,7 +58,6 @@ const Login = ({todos, setTodos, filteredTodos}) => {
   // Para verificar se o usuário já se logou e o token está armanzenado no localStorage
   useEffect(() => {
     fetchData()
-      .then(response => { console.log(response) })
   }, []);
 
   const submitLogin = async(e) => {

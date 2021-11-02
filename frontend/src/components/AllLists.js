@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { deleteList, createList } from '../service/api';
 
-const TodoLists = ({ lists, setLists, token }) => {
+const AllLists = ({ lists, setLists, token, authenticateNFetch }) => {
 
   const [redirect, setRedirect] = useState(false);
   const [listId, setListId] = useState('');
 
   const deleteHandler = async(id) => {
     const response = await deleteList({token, id});
-    if(response.status === 200) {
-      // Atualiza a lista para chamar o useEffect novamente
+    console.log(response.status);
+    if(response.message === 'Lista deletada com sucesso') {
       // para atualizar a lista de tarefas
-      setLists('');
+      setLists([...lists.filter(list => list._id !== id)]);
     }
   }
 
@@ -56,4 +56,4 @@ const TodoLists = ({ lists, setLists, token }) => {
   );
 };
 
-export default TodoLists;
+export default AllLists;
