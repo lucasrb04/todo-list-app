@@ -45,7 +45,9 @@ function Main() {
   // Function 
 
   const handleLogout = () => {
+    // Limpa o token do localStorage
     storeData('token', '');
+    // Redireciona para a página de login
     setRedirect(true);
   }
   return (
