@@ -67,7 +67,7 @@ const createList = async ({token}) => {
       'Content-type': 'application/json; charset=UTF-8', // The type of data you're sending
       'authorization': token,
     },
-    body: JSON.stringify({ name:'Nova lista', tasks: '' }), // The data you're sending
+    body: JSON.stringify({ name:'Nova lista', tasks: [] }), // The data you're sending
   });
   const data = await response.json();
   return data;

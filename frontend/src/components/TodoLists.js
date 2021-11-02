@@ -18,30 +18,20 @@ const TodoLists = ({ lists, setLists, token }) => {
 
   const addHandler = async() => {
     const response = await createList({token});
-    console.log(response);
-    if(response.status === 201) {
-      // Atualiza a lista para chamar o useEffect novamente
-      // para atualizar a lista de tarefas
-      console.log(response);
+    if(response._id) {
+      setListId(response._id);
       setRedirect(true)
     }
   }
 
-  // const completeHandler = () => {
-  //   setTodos(todos.map((el) => {
-  //     if (el.createdAt === todo.createdAt) {
-  //       return {
-  //         ...el,
-  //         completed: !el.completed
-  //       }
-  //     }
-  //     return el;
-  //   }));
-  // }
+  const editHlandler = (listId) => {
+    setListId(listId);
+    setRedirect(true)
+  }
 
   return (
     <div className="todo-container">
-      {redirect && <Redirect to={`/list` }/>}
+      {redirect && <Redirect to={`/list/${listId}` }/>}
       <button 
         onClick={addHandler}
         className="add-btn complete-btn" 
@@ -51,9 +41,9 @@ const TodoLists = ({ lists, setLists, token }) => {
       </button>
       <ul className="todo-list">
         {lists.map(list => (
-        <div className="todo">
+        <div key={list._id} className="todo">
           <li className={'todo-item'}>{list.name}</li>
-          <button onClick={()=> {("edited")}} className="edit-btn">
+          <button onClick={()=> {editHlandler(list._id)}} className="edit-btn">
             <i className="fas fa-edit"></i>
           </button>
           <button onClick={()=> {deleteHandler(list._id)}} className="trash-btn">

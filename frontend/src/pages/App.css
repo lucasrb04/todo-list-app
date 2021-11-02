@@ -112,8 +112,15 @@ form button:hover {
 .add-btn {
   top: 0;
   position: absolute;
-  margin-top: 300px;
+  margin-top: 30vh;
   /* margin-left: rem; */
+}
+
+.logout-btn {
+  top: 0;
+  position: absolute;
+  margin-top: 8vh;
+  margin-left: 500px;
 }
 
 .todo-item {

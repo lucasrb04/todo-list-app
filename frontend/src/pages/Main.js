@@ -21,7 +21,7 @@ function Main() {
   const [getToken, setToken] = useState('');
 
 
-  const verifyNFetch = async() => {
+  const authenticateNFetch = async() => {
     const token = getData('token');
     const response = await getAllLists({ token });
     if (!response.message) {
@@ -34,15 +34,22 @@ function Main() {
   // Effect  
   // Para verificar se o usuário já se logou e o token está armanzenado no localStorage
   useEffect(() => {
-    verifyNFetch()
+    authenticateNFetch()
   }, [lists, ]);
 
   // Function 
+
+  const handleLogout = () => {
+    storeData('token', '');
+    setRedirect(true);
+  }
   return (
     <div className="App">
       {redirect && <Redirect to='/' />}
     <header>
-      
+      <button onClick={handleLogout} className="trash-btn logout-btn">
+        <i className="fas fa-sign-out-alt"></i>
+      </button>
     </header>
     {pathname === '/list' 
             ? <TodoLists lists={lists} setLists={setLists} token={getToken} />
