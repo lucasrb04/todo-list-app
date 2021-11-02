@@ -13,6 +13,7 @@ const login = async (userObjInfo) => {
     body: JSON.stringify({...userObjInfo}), // The data you're sending
   });
   const data = await response.json();
+  console.log(data);
   return data;
 };
 
