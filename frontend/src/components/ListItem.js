@@ -28,7 +28,7 @@ function ListItem() {
     const response = await getListById({ token, id });
     console.log(response);
     setName(response.name);
-    
+    setTodos(response.tasks);
   }
   // Para verificar se o usuário já se logou e o token está armanzenado no localStorage
   useEffect(() => {
@@ -75,9 +75,20 @@ function ListItem() {
   const handleChange = (e) => {
     setName(e.target.value);
   }
-  
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log("salvar");
+  }
   return (
     <div className="todo-list-container">
+      <button 
+        onClick={handleSubmit}
+        className="save-btn complete-btn" 
+        type="submit"
+      >
+      Salvar Lista
+      </button>
       <header >
         <h2>Nome da Lista:</h2>
         <form>
