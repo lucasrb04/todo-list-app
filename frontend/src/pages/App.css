@@ -65,7 +65,7 @@ form button:hover {
 }
 
 .todo-list-container {
-  margin-top: -15rem;
+  margin-top: -10rem;
   /* position: absolute; */
   
 }
@@ -135,6 +135,7 @@ form button:hover {
 .todo-input {
   border: 1px solid #b8aaa6;
   list-style-type: none;
+  margin-left: 10px;
 }
 
 .fa-trash,

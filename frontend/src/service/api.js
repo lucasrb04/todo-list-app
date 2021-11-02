@@ -73,4 +73,17 @@ const createList = async ({token}) => {
   return data;
 };
 
-export { login, createUser, getAllLists, deleteList, createList };
+const getListById = async ({token, id}) => {
+  const URL_TO_FETCH = URL_ENV + `/list/${id}`;
+  const response = await fetch(URL_TO_FETCH, {
+    method: 'get', // opcional
+    mode: 'cors', // opcional
+    headers: {
+      'authorization': token,
+    },
+  });
+  const data = await response.json();
+  return data;
+};
+
+export { login, createUser, getAllLists, deleteList, createList, getListById };
