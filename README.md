@@ -8,7 +8,12 @@
 
 **Descrição**
 
-O aplicativo busca melhorar a produtividade dos funcionários de uma empresa através de uma lista de tarefas. A aplicação conta com uma tela de login, para cadastro e autenticação de usuários. Ao logar, o usuário tem acesso a todas as listas de tarefas criadas em sua conta. Nessa parte o usuário pode criar uma nova lista, apagar ou editar uma lista existente. Ao criar ou editar uma nova lista, o usuário pode cadastrar novas tarefas, apagar tarefas antigas e marcar como concluída. Além dessas opções, essa página tem filtros para ordenar as tarefas em ordem alfabética, por data de criação e por status.
+Melhore a produtividade de sua empresa com o aplicativo Todo List App. Disponibilize uma lista de tarefa para cada um consiga se organizar e melhorar sua produtividade. 
+
+<img src="https://media3.giphy.com/media/3o6MbhbYBsqTrbP2qQ/giphy.gif?cid=790b7611b79d1c56a9b188a97ee0ef46d799700f98f48939&rid=giphy.gif&ct=g" align="left" width="250" height="150" />
+
+
+A aplicação conta com uma tela de login, para cadastro e autenticação de usuários. Ao logar, o usuário tem acesso a todas as listas de tarefas criadas em sua conta. Nessa parte o usuário pode criar uma nova lista, apagar ou editar uma lista existente. Ao criar ou editar uma nova lista, o usuário pode cadastrar novas tarefas, apagar tarefas antigas e marcar como concluída. Além dessas opções, essa página tem filtros para ordenar as tarefas em ordem alfabética, por data de criação e por status.
 A aplicação foi separada em dois repositórios, a api em NodeJs, com todas as regras de négócio e conexão com o banco de dados e o app em ReactJs.
 ### :nut_and_bolt: Tecnologias
 
