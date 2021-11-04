@@ -67,6 +67,8 @@ npm start
 ### Link para o deploy:
 https://todolist1-app.herokuapp.com/
 
+Obs: Modo mobile ainda em desenvolvimento, portanto se usar pelo celular, ative a opção de visualizar via desktop.
+
 #### Autor
 
 👤 Lucas Ribeiro
