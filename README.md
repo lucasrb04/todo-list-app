@@ -8,7 +8,7 @@
 
 **Descrição**
 
-Melhore a produtividade de sua empresa com o aplicativo Todo List App. Disponibilize uma lista de tarefa para cada um consiga se organizar e melhorar sua produtividade. 
+Melhore a produtividade de sua empresa com o Todo List App. Disponibilize uma ótima ferramenta para gerenciamento de tarefas para garantir uma equipe mais organizada. 
 
 <img src="https://media3.giphy.com/media/3o6MbhbYBsqTrbP2qQ/giphy.gif?cid=790b7611b79d1c56a9b188a97ee0ef46d799700f98f48939&rid=giphy.gif&ct=g" align="left" width="250" height="150" />
 
@@ -57,11 +57,14 @@ npm start
 ```
 
 ### Login:
-![image](https://user-images.githubusercontent.com/20855321/140431446-85b728e9-3e94-4959-8813-b4661116ddfd.png)
+<img src="https://user-images.githubusercontent.com/20855321/140431446-85b728e9-3e94-4959-8813-b4661116ddfd.png" width="250" height="200" />
+
 ### Main:
-![image](https://user-images.githubusercontent.com/20855321/140431707-be31abc0-266d-479c-bf58-269e38b2e891.png)
-### Main:
-![image](https://user-images.githubusercontent.com/20855321/140431749-9895b67c-c6cf-4209-9264-10a8d5dc3a42.png)
+<img src="https://user-images.githubusercontent.com/20855321/140431707-be31abc0-266d-479c-bf58-269e38b2e891.png" width="250" height="200" />
+
+### Lists:
+<img src="https://user-images.githubusercontent.com/20855321/140431749-9895b67c-c6cf-4209-9264-10a8d5dc3a42.png" width="250" height="200" />
+
 
 
 ### Link para o deploy:
